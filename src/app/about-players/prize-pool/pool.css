@@ -1,0 +1,59 @@
+.prize-pool-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  padding: 20px;
+}
+
+.prize-pool-header h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 45px;
+  color: #ef4444;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+.prize-pool-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.prize-card-item {
+  background-color: rgba(245, 222, 179, 0.1);
+  border: 1px solid rgba(245, 222, 179, 0.2);
+  backdrop-filter: blur(8px);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.2s ease-in-out, border-color 0.2s;
+}
+
+.prize-card-item h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 800;
+}
+
+.prize-coins {
+  font-size: 18px;
+  font-weight: bold;
+  color: #f59e0b; /* Orange/Gold */
+}
+
+.prize-card-item:hover {
+  transform: scale(1.03);
+  border-color: #f59e0b;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+}

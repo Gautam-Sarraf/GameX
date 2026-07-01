@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cyan-50: var(--color-orange-50);
+  --color-cyan-100: var(--color-orange-100);
+  --color-cyan-200: var(--color-orange-200);
+  --color-cyan-300: var(--color-orange-300);
+  --color-cyan-400: var(--color-orange-400);
+  --color-cyan-500: var(--color-orange-500);
+  --color-cyan-600: var(--color-orange-600);
+  --color-cyan-700: var(--color-orange-700);
+  --color-cyan-800: var(--color-orange-800);
+  --color-cyan-900: var(--color-orange-900);
+  --color-cyan-950: var(--color-orange-950);
+
+  --color-blue-500: var(--color-orange-500);
+  --color-blue-600: var(--color-orange-600);
+  --color-blue-950: var(--color-orange-950);
+
+  --color-purple-400: var(--color-amber-400);
+  --color-purple-500: var(--color-amber-500);
+  --color-purple-600: var(--color-amber-600);
+  --color-purple-950: var(--color-orange-950);
+}
+
+@layer base {
+  body {
+    background-color: #030303;
+    color: #f4f4f5;
+    font-family: 'Poppins', 'Montserrat', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Custom Scrollbars */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #09090b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+  }
+}
+
+/* Custom premium gaming utility classes */
+.glass-panel {
+  background: rgba(9, 9, 11, 0.45);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(39, 39, 42, 0.4);
+}
+
+.text-glow-orange {
+  text-shadow: 0 0 10px rgba(249, 115, 22, 0.4);
+}
+
+.bg-radial-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 60%);
+}
+
+.border-glow-orange {
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.15);
+}
+
+/* React-easy-crop / custom file inputs */
+.file-upload-mask {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
