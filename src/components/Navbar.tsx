@@ -54,11 +54,9 @@ export function Navbar() {
         
         {/* Logo */}
         <div className="flex items-center gap-6">
-          <Link href="/" className="flex items-center space-x-2">
-            <Trophy className="h-6 w-6 text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]" />
-            <span className="text-xl font-black tracking-wider uppercase bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent">
-              ESPORTBRAWL
-            </span>
+          <Link href="/" className="flex items-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/assets/images/logo.svg" alt="GameX Logo" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop Navigation Links */}

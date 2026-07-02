@@ -7,6 +7,7 @@ import { Search, SlidersHorizontal, LayoutGrid, List, ChevronLeft, ChevronRight,
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { TournamentCard } from '@/components/TournamentCard';
+import { Container } from '@/components/ui/Container';
 import { TournamentService } from '@/services/tournament.service';
 import { AuthService } from '@/services/auth.service';
 import { GAMES } from '@/mock/data';
@@ -126,24 +127,24 @@ export default function TournamentsPage() {
 
   return (
     <div className="min-h-screen bg-[#030303] py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <Container className="space-y-8">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <h1 className="text-4xl font-extrabold uppercase text-white font-oswald tracking-tight flex items-center gap-2">
-              <Trophy className="h-8 w-8 text-cyan-400" /> Tournaments Lobby
+              <Trophy className="h-8 w-8 text-orange-500" /> Tournaments Lobby
             </h1>
             <p className="text-zinc-400 text-sm mt-1">Explore, register, and conquer active leagues.</p>
           </div>
           
           {/* Layout Mode Toggles */}
-          <div className="flex items-center space-x-2 border border-zinc-800 p-1 rounded-md bg-zinc-950">
+          <div className="flex items-center space-x-2 border border-zinc-850 p-1 rounded-md bg-zinc-950/60">
             <button
               onClick={() => setViewMode('grid')}
               className={cn(
                 'p-1.5 rounded transition-all cursor-pointer',
-                viewMode === 'grid' ? 'bg-zinc-800 text-cyan-400' : 'text-zinc-500 hover:text-zinc-300'
+                viewMode === 'grid' ? 'bg-zinc-900 text-orange-500' : 'text-zinc-500 hover:text-zinc-450'
               )}
             >
               <LayoutGrid className="h-4 w-4" />
@@ -152,7 +153,7 @@ export default function TournamentsPage() {
               onClick={() => setViewMode('list')}
               className={cn(
                 'p-1.5 rounded transition-all cursor-pointer',
-                viewMode === 'list' ? 'bg-zinc-800 text-cyan-400' : 'text-zinc-500 hover:text-zinc-300'
+                viewMode === 'list' ? 'bg-zinc-900 text-orange-500' : 'text-zinc-500 hover:text-zinc-450'
               )}
             >
               <List className="h-4 w-4" />
@@ -161,7 +162,7 @@ export default function TournamentsPage() {
         </div>
 
         {/* Filter Controls Row */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-5 rounded-xl border border-zinc-900 bg-zinc-950/40 backdrop-blur-md">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-5 rounded-xl border border-zinc-900 bg-zinc-950/40 backdrop-blur-md shadow-sm">
           {/* Search */}
           <div className="relative">
             <Search className="absolute left-3 top-3 h-4 w-4 text-zinc-500" />
@@ -170,7 +171,7 @@ export default function TournamentsPage() {
               placeholder="Search tournaments..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-9 w-full h-10 rounded-md border border-zinc-800 bg-zinc-900/60 text-sm text-white placeholder-zinc-500 focus:border-cyan-500 focus:outline-none"
+              className="pl-9 w-full h-10 rounded-md border border-zinc-800 bg-zinc-900/60 text-sm text-white placeholder-zinc-500 focus:border-orange-500 focus:outline-none"
             />
           </div>
 
@@ -178,11 +179,11 @@ export default function TournamentsPage() {
           <select
             value={selectedGame}
             onChange={(e) => setSelectedGame(e.target.value)}
-            className="h-10 rounded-md border border-zinc-800 bg-zinc-900/60 text-sm text-zinc-300 px-3 focus:border-cyan-500 focus:outline-none cursor-pointer"
+            className="h-10 rounded-md border border-zinc-800 bg-zinc-900/60 text-sm text-white px-3 focus:border-orange-500 focus:outline-none cursor-pointer"
           >
-            <option value="All">All Games</option>
+            <option value="All" className="bg-zinc-950 text-white">All Games</option>
             {GAMES.map(g => (
-              <option key={g} value={g}>{g}</option>
+              <option key={g} value={g} className="bg-zinc-950 text-white">{g}</option>
             ))}
           </select>
 
@@ -190,23 +191,23 @@ export default function TournamentsPage() {
           <select
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
-            className="h-10 rounded-md border border-zinc-800 bg-zinc-900/60 text-sm text-zinc-300 px-3 focus:border-cyan-500 focus:outline-none cursor-pointer"
+            className="h-10 rounded-md border border-zinc-800 bg-zinc-900/60 text-sm text-white px-3 focus:border-orange-500 focus:outline-none cursor-pointer"
           >
-            <option value="All">All Statuses</option>
-            <option value="Upcoming">Upcoming</option>
-            <option value="Live">Live</option>
-            <option value="Completed">Completed</option>
+            <option value="All" className="bg-zinc-950 text-white">All Statuses</option>
+            <option value="Upcoming" className="bg-zinc-950 text-white">Upcoming</option>
+            <option value="Live" className="bg-zinc-950 text-white">Live</option>
+            <option value="Completed" className="bg-zinc-950 text-white">Completed</option>
           </select>
 
           {/* Sort selection */}
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="h-10 rounded-md border border-zinc-800 bg-zinc-900/60 text-sm text-zinc-300 px-3 focus:border-cyan-500 focus:outline-none cursor-pointer"
+            className="h-10 rounded-md border border-zinc-800 bg-zinc-900/60 text-sm text-white px-3 focus:border-orange-500 focus:outline-none cursor-pointer"
           >
-            <option value="date_asc">Start Date (Earliest)</option>
-            <option value="date_desc">Start Date (Latest)</option>
-            <option value="prize_desc">Prize Pool (Highest)</option>
+            <option value="date_asc" className="bg-zinc-950 text-white">Start Date (Earliest)</option>
+            <option value="date_desc" className="bg-zinc-950 text-white">Start Date (Latest)</option>
+            <option value="prize_desc" className="bg-zinc-950 text-white">Prize Pool (Highest)</option>
           </select>
         </div>
 
@@ -214,7 +215,7 @@ export default function TournamentsPage() {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="h-80 w-full bg-zinc-900/50 rounded-xl border border-zinc-800 animate-pulse" />
+              <div key={i} className="h-80 w-full bg-zinc-900/40 rounded-xl border border-zinc-900 animate-pulse" />
             ))}
           </div>
         ) : currentItems.length > 0 ? (
@@ -238,19 +239,19 @@ export default function TournamentsPage() {
                 return (
                   <div
                     key={trn.id}
-                    className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 border border-zinc-900 bg-zinc-950/40 rounded-xl gap-4 hover:border-zinc-850 transition-colors"
+                    className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 border border-zinc-850 bg-zinc-950/40 backdrop-blur-md rounded-xl gap-4 hover:border-zinc-800 transition-colors shadow-sm"
                   >
                     <div className="flex items-center gap-4">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={trn.banner} alt={trn.title} className="h-16 w-24 object-cover rounded-lg bg-zinc-900" />
+                      <img src={trn.banner} alt={trn.title} className="h-16 w-24 object-cover rounded-lg bg-zinc-900 border border-zinc-800" />
                       <div>
-                        <span className="text-[10px] bg-cyan-950/40 border border-cyan-800 text-cyan-400 px-2 py-0.5 rounded font-black uppercase tracking-wider">
+                        <span className="text-[10px] bg-orange-500/10 border border-orange-500/20 text-orange-400 px-2 py-0.5 rounded font-black uppercase tracking-wider">
                           {trn.game}
                         </span>
-                        <h4 className="text-sm font-bold text-white mt-1 hover:text-cyan-400 transition-colors">
+                        <h4 className="text-sm font-bold text-white mt-1 hover:text-orange-500 transition-colors">
                           <Link href={`/tournaments/${trn.id}`}>{trn.title}</Link>
                         </h4>
-                        <p className="text-xs text-zinc-500 font-semibold mt-0.5">
+                        <p className="text-xs text-zinc-400 font-semibold mt-0.5">
                           Hosted by {trn.organizerName} • Starts {formatDate(trn.startDate)}
                         </p>
                       </div>
@@ -264,7 +265,7 @@ export default function TournamentsPage() {
                       <div>
                         <p className="text-[10px] text-zinc-500 uppercase font-bold">Slots</p>
                         <p className="text-sm font-black text-zinc-300">
-                          {trn.registeredCount} <span className="text-zinc-600">/ {trn.maxSlots}</span>
+                          {trn.registeredCount} <span className="text-zinc-500">/ {trn.maxSlots}</span>
                         </p>
                       </div>
                       <div className="flex items-center gap-2">
@@ -290,7 +291,7 @@ export default function TournamentsPage() {
             </div>
           )
         ) : (
-          <div className="text-center py-20 border border-dashed border-zinc-800 rounded-xl bg-zinc-950/20 text-zinc-500">
+          <div className="text-center py-20 border border-dashed border-zinc-850 rounded-xl bg-zinc-950/20 text-zinc-500 shadow-sm">
             No tournaments found matching the filter criteria.
           </div>
         )}
@@ -320,7 +321,7 @@ export default function TournamentsPage() {
           </div>
         )}
 
-      </div>
+      </Container>
     </div>
   );
 }

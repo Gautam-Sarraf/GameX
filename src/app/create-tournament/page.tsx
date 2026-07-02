@@ -113,7 +113,7 @@ export default function CreateTournamentPage() {
   if (!user) {
     return (
       <div className="min-h-screen bg-[#030303] flex items-center justify-center p-4">
-        <Card className="max-w-md w-full border-zinc-900 bg-zinc-950 text-center p-6 space-y-4">
+        <Card className="max-w-md w-full border-zinc-900 bg-zinc-950/60 text-center p-6 space-y-4 shadow-xl">
           <Trophy className="h-10 w-10 text-zinc-500 mx-auto" />
           <h2 className="text-xl font-bold uppercase tracking-tight text-white">Login Required</h2>
           <p className="text-sm text-zinc-400">
@@ -142,7 +142,7 @@ export default function CreateTournamentPage() {
         </div>
 
         {/* Step Progress Indicators */}
-        <div className="flex justify-between items-center bg-zinc-950 p-4 border border-zinc-900 rounded-xl overflow-x-auto">
+        <div className="flex justify-between items-center bg-zinc-950/60 p-4 border border-zinc-900 rounded-xl overflow-x-auto shadow-sm">
           {stepsIndicators.map((sName, idx) => {
             const stepNum = idx + 1;
             const isActive = step === stepNum;
@@ -151,19 +151,19 @@ export default function CreateTournamentPage() {
               <div key={idx} className="flex items-center space-x-2 whitespace-nowrap">
                 <span className={cn(
                   'h-6 w-6 rounded-full flex items-center justify-center text-xs font-black border',
-                  isActive ? 'border-cyan-500 bg-cyan-950/40 text-cyan-400' :
-                  isCompleted ? 'border-emerald-500 bg-emerald-950/20 text-emerald-400' :
+                  isActive ? 'border-orange-500 bg-orange-500/10 text-orange-400' :
+                  isCompleted ? 'border-emerald-500 bg-emerald-500/10 text-emerald-400' :
                   'border-zinc-800 bg-zinc-900 text-zinc-500'
                 )}>
                   {isCompleted ? <ShieldCheck className="h-3.5 w-3.5" /> : stepNum}
                 </span>
                 <span className={cn(
                   'text-xs font-bold',
-                  isActive ? 'text-cyan-400' : isCompleted ? 'text-zinc-300' : 'text-zinc-500'
+                  isActive ? 'text-orange-400' : isCompleted ? 'text-zinc-300' : 'text-zinc-500'
                 )}>
                   {sName}
                 </span>
-                {idx < stepsIndicators.length - 1 && <ChevronRight className="h-3.5 w-3.5 text-zinc-850" />}
+                {idx < stepsIndicators.length - 1 && <ChevronRight className="h-3.5 w-3.5 text-zinc-800" />}
               </div>
             );
           })}
@@ -177,7 +177,7 @@ export default function CreateTournamentPage() {
             <Card>
               <CardContent className="p-6 space-y-4">
                 <h3 className="text-lg font-bold text-white uppercase tracking-tight flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-cyan-400" /> Basic Details
+                  <Calendar className="h-4 w-4 text-orange-500" /> Basic Details
                 </h3>
 
                 <div className="space-y-1">
@@ -216,17 +216,17 @@ export default function CreateTournamentPage() {
             <Card>
               <CardContent className="p-6 space-y-4">
                 <h3 className="text-lg font-bold text-white uppercase tracking-tight flex items-center gap-2">
-                  <Gamepad className="h-4 w-4 text-purple-400" /> Game Selection & Format
+                  <Gamepad className="h-4 w-4 text-orange-500" /> Game Selection & Format
                 </h3>
 
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Select Game</label>
                   <select
-                    className="w-full h-10 rounded-md border border-zinc-800 bg-zinc-900/60 text-sm text-zinc-300 px-3 focus:border-cyan-500 focus:outline-none cursor-pointer"
+                    className="w-full h-10 rounded-md border border-zinc-800 bg-zinc-900/60 text-sm text-white px-3 focus:border-orange-500 focus:outline-none cursor-pointer"
                     {...register('game')}
                   >
                     {GAMES.map(g => (
-                      <option key={g} value={g}>{g}</option>
+                      <option key={g} value={g} className="bg-zinc-950 text-white">{g}</option>
                     ))}
                   </select>
                 </div>
@@ -283,7 +283,7 @@ export default function CreateTournamentPage() {
             <Card>
               <CardContent className="p-6 space-y-4">
                 <h3 className="text-lg font-bold text-white uppercase tracking-tight flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-emerald-400" /> Rulebook Regulations
+                  <Sparkles className="h-4 w-4 text-orange-500" /> Rulebook Regulations
                 </h3>
 
                 <div className="space-y-1">
@@ -304,17 +304,17 @@ export default function CreateTournamentPage() {
             <Card>
               <CardContent className="p-6 space-y-6">
                 <h3 className="text-lg font-bold text-white uppercase tracking-tight flex items-center gap-2 border-b border-zinc-900 pb-3">
-                  <ShieldCheck className="h-4 w-4 text-cyan-400" /> Summary Review
+                  <ShieldCheck className="h-4 w-4 text-orange-500" /> Summary Review
                 </h3>
 
-                <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="grid grid-cols-2 gap-4 text-sm text-zinc-300">
                   <div>
                     <span className="text-zinc-500 font-semibold block text-xs">Title</span>
                     <span className="font-bold text-white">{watchedValues.title}</span>
                   </div>
                   <div>
                     <span className="text-zinc-500 font-semibold block text-xs">Game</span>
-                    <span className="font-bold text-cyan-400 uppercase">{watchedValues.game}</span>
+                    <span className="font-bold text-orange-500 uppercase">{watchedValues.game}</span>
                   </div>
                   <div>
                     <span className="text-zinc-500 font-semibold block text-xs">Start Date</span>
@@ -330,7 +330,7 @@ export default function CreateTournamentPage() {
                   </div>
                   <div>
                     <span className="text-zinc-500 font-semibold block text-xs">Entry Fee</span>
-                    <span className="font-bold text-cyan-400">
+                    <span className="font-bold text-orange-400">
                       {watchedValues.entryFee > 0 ? formatCurrency(watchedValues.entryFee) : 'FREE'}
                     </span>
                   </div>

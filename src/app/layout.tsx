@@ -28,7 +28,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'EsportBrawl - Premium Tournament Platform',
+  title: 'GameX - Premium Tournament Platform',
   description: 'Participate, compete, and organize gaming tournaments at FACEIT-grade visual quality.',
 };
 
@@ -43,7 +43,7 @@ export default function RootLayout({
       className={`${montserrat.className} ${oswald.variable} ${poppins.variable} h-full antialiased dark`}
       style={{ colorScheme: 'dark' }}
     >
-      <body className="min-h-full flex flex-col bg-[#030303] text-zinc-100 selection:bg-cyan-500 selection:text-black">
+      <body className="min-h-full flex flex-col bg-zinc-50 text-zinc-900 selection:bg-orange-500 selection:text-black">
         <QueryProvider>
           <ThemeProvider>
             <Navbar />

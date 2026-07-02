@@ -1,6 +1,6 @@
-# EsportBrawl - Premium Esports Tournament Platform
+# GameX - Premium Esports Tournament Platform
 
-EsportBrawl (previously GameWeb) is a premium, production-ready gaming and tournament matchmaking web application. The frontend is built using Next.js 15+ App Router, styled with Tailwind CSS, and powered by TanStack Query for modern clientside caching.
+GameX is a premium, production-ready gaming and tournament matchmaking web application. The frontend is built using Next.js 15+ App Router, styled with Tailwind CSS, and powered by TanStack Query for modern clientside caching.
 
 The application features a clean API abstraction layer that simulates real-world network latency and state mutations, making it ready to be linked to a FastAPI (Python) backend with minimal changes.
 

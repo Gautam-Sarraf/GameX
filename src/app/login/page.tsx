@@ -130,7 +130,7 @@ export default function LoginPage() {
             </div>
             <div className="toggle-panel toggle-right">
               <h1 className="text-xl font-bold uppercase tracking-wide">Hello, Gamer</h1>
-              <p>Register with your personal details to compete in EsportBrawl cups</p>
+              <p>Register with your personal details to compete in GameX cups</p>
               <button className="toggle-btn-hidden" onClick={() => setIsActive(true)}>Sign Up</button>
             </div>
           </div>

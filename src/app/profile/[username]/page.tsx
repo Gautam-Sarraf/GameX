@@ -117,21 +117,21 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
             <img
               src={profileUser.avatar}
               alt={profileUser.username}
-              className="h-28 w-28 rounded-full border-4 border-cyan-500/80 bg-zinc-950 drop-shadow-[0_0_15px_rgba(6,182,212,0.3)]"
+              className="h-28 w-28 rounded-full border-4 border-orange-500 bg-zinc-950 drop-shadow-[0_0_15px_rgba(249,115,22,0.3)]"
             />
             <div className="text-center sm:text-left space-y-1">
               <div className="flex items-center gap-2">
                 <h1 className="text-2xl md:text-3xl font-black text-white font-oswald tracking-tight">{profileUser.username}</h1>
-                <span className="px-2 py-0.5 text-[9px] bg-cyan-950/40 border border-cyan-800 text-cyan-400 font-bold uppercase rounded">
+                <span className="px-2 py-0.5 text-[9px] bg-orange-500/10 border border-orange-500/20 text-orange-400 font-bold uppercase rounded">
                   Level {profileUser.level}
                 </span>
               </div>
-              <p className="text-xs text-zinc-500 font-semibold flex items-center justify-center sm:justify-start gap-1">
+              <p className="text-xs text-zinc-400 font-semibold flex items-center justify-center sm:justify-start gap-1">
                 <MapPin className="h-3.5 w-3.5" /> Country: {profileUser.country}
               </p>
               {profileUser.walletAddress && (
                 <p className="text-[11px] text-zinc-500 font-mono flex items-center justify-center sm:justify-start gap-1">
-                  <Wallet className="h-3 w-3 text-cyan-500/80" /> {profileUser.walletAddress.slice(0, 6)}...{profileUser.walletAddress.slice(-4)}
+                  <Wallet className="h-3 w-3 text-orange-400" /> {profileUser.walletAddress.slice(0, 6)}...{profileUser.walletAddress.slice(-4)}
                 </p>
               )}
             </div>
@@ -165,7 +165,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
               </p>
               <div className="flex flex-wrap gap-2 pt-2">
                 {profileUser.tags.map((t, idx) => (
-                  <span key={idx} className="px-2 py-0.5 text-[9px] bg-zinc-900 border border-zinc-800 text-cyan-400 rounded-md font-bold uppercase">
+                  <span key={idx} className="px-2 py-0.5 text-[9px] bg-zinc-900 border border-zinc-800 text-orange-400 rounded-md font-bold uppercase">
                     {t}
                   </span>
                 ))}
@@ -177,7 +177,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
           <Card>
             <CardContent className="p-6 space-y-4">
               <h3 className="text-sm font-extrabold uppercase text-white tracking-wider flex items-center gap-2 border-b border-zinc-900 pb-2">
-                <Trophy className="h-4 w-4 text-cyan-400" /> Stats Overview
+                <Trophy className="h-4 w-4 text-orange-400" /> Stats Overview
               </h3>
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div className="p-3 bg-zinc-900/40 rounded-lg border border-zinc-900">
@@ -205,12 +205,12 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
             <Card>
               <CardContent className="p-6 space-y-3">
                 <h3 className="text-sm font-extrabold uppercase text-white tracking-wider flex items-center gap-2 border-b border-zinc-900 pb-2">
-                  <Sparkles className="h-4 w-4 text-yellow-500" /> Equipped Badges
+                  <Sparkles className="h-4 w-4 text-orange-500" /> Equipped Badges
                 </h3>
                 <div className="grid grid-cols-1 gap-2.5">
                   {profileUser.badges.map(badge => (
                     <div key={badge.id} className="flex items-center gap-3 p-2 bg-zinc-900/40 rounded-lg border border-zinc-900">
-                      <div className={cn('h-8 w-8 rounded-full flex items-center justify-center border font-bold text-xs', badge.color)}>
+                      <div className={cn('h-8 w-8 rounded-full flex items-center justify-center border font-bold text-xs', badge.color.replace('cyan', 'orange'))}>
                         ★
                       </div>
                       <div>
@@ -247,20 +247,20 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                   <div className="h-64 w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                        <XAxis dataKey="name" stroke="#52525b" fontSize={11} tickLine={false} />
-                        <YAxis stroke="#52525b" fontSize={11} tickLine={false} />
+                        <XAxis dataKey="name" stroke="#a1a1aa" fontSize={11} tickLine={false} />
+                        <YAxis stroke="#a1a1aa" fontSize={11} tickLine={false} />
                         <Tooltip
                           contentStyle={{ backgroundColor: '#09090b', borderColor: '#27272a', borderRadius: '8px' }}
                           labelStyle={{ color: '#f4f4f5', fontWeight: 'bold' }}
-                          itemStyle={{ color: '#06b6d4' }}
+                          itemStyle={{ color: '#ea580c' }}
                         />
                         <Line
                           type="monotone"
                           dataKey="xp"
-                          stroke="#06b6d4"
+                          stroke="#ea580c"
                           strokeWidth={3}
                           activeDot={{ r: 6 }}
-                          dot={{ fill: '#06b6d4', r: 4 }}
+                          dot={{ fill: '#ea580c', r: 4 }}
                         />
                       </LineChart>
                     </ResponsiveContainer>
@@ -273,7 +273,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                 <CardContent className="p-6 space-y-3">
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-zinc-400 font-semibold flex items-center">
-                      <ArrowUp className="h-4 w-4 mr-1 text-cyan-400" /> XP Level Progression
+                      <ArrowUp className="h-4 w-4 mr-1 text-orange-500" /> XP Level Progression
                     </span>
                     <span className="font-mono font-bold text-white">
                       {profileUser.xp % 1500} <span className="text-zinc-600">/ 1500 XP to Level {profileUser.level + 1}</span>
@@ -282,7 +282,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                   <div className="h-2 w-full bg-zinc-900 border border-zinc-800 rounded-full overflow-hidden">
                     <div
                       style={{ width: `${((profileUser.xp % 1500) / 1500) * 100}%` }}
-                      className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full shadow-[0_0_8px_rgba(6,182,212,0.4)]"
+                      className="h-full bg-gradient-to-r from-orange-500 to-amber-500 rounded-full shadow-[0_0_8px_rgba(249,115,22,0.4)]"
                     />
                   </div>
                 </CardContent>
@@ -294,7 +294,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
               <Card>
                 <CardContent className="p-6">
                   <h3 className="text-base font-extrabold uppercase text-white tracking-tight flex items-center gap-2 mb-6">
-                    <Award className="h-5 w-5 text-yellow-500" /> Gamer Achievements
+                    <Award className="h-5 w-5 text-orange-500" /> Gamer Achievements
                   </h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

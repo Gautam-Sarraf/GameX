@@ -33,7 +33,7 @@ export const ACHIEVEMENTS: Achievement[] = Array.from({ length: 30 }).map((_, i)
   ];
   
   const descriptions = [
-    'Register for your first tournament on EsportBrawl.',
+    'Register for your first tournament on GameX.',
     'Win your first competitive match.',
     'Play 10 custom games or community matches.',
     'Win a featured tournament championship.',
@@ -43,7 +43,7 @@ export const ACHIEVEMENTS: Achievement[] = Array.from({ length: 30 }).map((_, i)
     'Compete in 15 Rocket League tournaments.',
     'Get 100 headshots in Counter-Strike 2.',
     'Play 20 matches in Valorant.',
-    'Reach Level 50 on EsportBrawl.',
+    'Reach Level 50 on GameX.',
     'Earn a total of $5,000 in prize pools.',
     'Participate in tournaments for 3 consecutive months.',
     'Add 10 friends to your friends list.',
@@ -408,7 +408,7 @@ export const COMMUNITY_POSTS: ForumPost[] = Array.from({ length: 25 }).map((_, i
     'Upcoming Valorant Open tournament registration opens tomorrow!',
     'How do I improve my tracking in Apex Legends? Looking for guides.',
     'Dota 2 patch discussion: Top tier mid lane champions in 7.35b',
-    'EsportBrawl Update: Multi-stage organizers dashboards are live!',
+    'GameX Update: Multi-stage organizers dashboards are live!',
     'Rocket League freestyle competition - Clip submissions thread',
     'Tips for hosting a clean local LAN tourney with 16 teams',
     'LFG: Diamond Valorant squad for ESL cup next weekend',
@@ -422,7 +422,7 @@ export const COMMUNITY_POSTS: ForumPost[] = Array.from({ length: 25 }).map((_, i
     'I have been struggling in mid-range battles on Apex. My mouse sensitivity is 800 DPI at 1.2 in-game. Help!',
     'Mage items got buffed heavily. Stormcrafter is extremely strong. Who is your default pick now?',
     'We are excited to share that users hosting tournaments can now manage, approve, or export participants directly.',
-    'Drop your best goals in the comments. The most upvoted clip wins 500 EsportBrawl coins!',
+    'Drop your best goals in the comments. The most upvoted clip wins 500 GameX coins!',
     'Running a local setup in Munich. Need help with matchmaking API servers configuration to sync results.',
     'Need a sentinel and an initiator player. Must be Diamond II+, speaking English, available 18:00 UTC.',
     'Here is the standard templates for match limits, pause allowances, and tiebreaker procedures.',

@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { Trophy, Star, ShieldAlert, Award, ArrowUp, Zap, Sparkles } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Container } from '@/components/ui/Container';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { LeaderboardService } from '@/services/leaderboard.service';
 import { cn } from '@/lib/utils';
@@ -47,14 +48,14 @@ export default function LeaderboardsPage() {
 
   return (
     <div className="min-h-screen bg-[#030303] py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <Container className="space-y-8">
         
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-4xl font-extrabold uppercase text-white font-oswald tracking-tight flex items-center justify-center gap-2">
-            <Trophy className="h-9 w-9 text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.4)]" /> Global Leaderboards
+            <Trophy className="h-9 w-9 text-orange-500" /> Global Leaderboards
           </h1>
-          <p className="text-zinc-400 text-sm">Behold the highest ranking gladiators and tournament operators in EsportBrawl.</p>
+          <p className="text-zinc-400 text-sm">Behold the highest ranking gladiators and tournament operators in GameX.</p>
         </div>
 
         {/* Double-Grid Layout: Left (Podium & List), Right (Organizers) */}
@@ -64,8 +65,8 @@ export default function LeaderboardsPage() {
           <div className="lg:col-span-2 space-y-6">
             
             {/* Criteria Tabs */}
-            <div className="flex justify-between items-center bg-zinc-950 p-2 border border-zinc-900 rounded-xl">
-              <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider pl-2">Filter Board</span>
+            <div className="flex justify-between items-center bg-zinc-950/60 p-2 border border-zinc-900 rounded-xl">
+              <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider pl-2">Filter Board</span>
               <Tabs value={criteria} onValueChange={(val) => setCriteria(val as any)}>
                 <TabsList>
                   <TabsTrigger value="xp">Highest XP</TabsTrigger>
@@ -77,8 +78,8 @@ export default function LeaderboardsPage() {
 
             {isLoading ? (
               <div className="space-y-4">
-                <div className="h-44 w-full bg-zinc-900/50 rounded-xl border border-zinc-800 animate-pulse" />
-                <div className="h-80 w-full bg-zinc-900/50 rounded-xl border border-zinc-800 animate-pulse" />
+                <div className="h-44 w-full bg-zinc-900/40 rounded-xl border border-zinc-900 animate-pulse" />
+                <div className="h-80 w-full bg-zinc-900/40 rounded-xl border border-zinc-900 animate-pulse" />
               </div>
             ) : topPlayers.length > 0 ? (
               <div className="space-y-6">
@@ -99,23 +100,23 @@ export default function LeaderboardsPage() {
                         <img
                           src={podium[1].avatar}
                           alt=""
-                          className="h-16 w-16 rounded-full border-2 border-zinc-400 bg-zinc-950"
+                          className="h-16 w-16 rounded-full border-2 border-zinc-700 bg-zinc-950"
                         />
-                        <span className="absolute bottom-[-5px] right-[-5px] h-6 w-6 rounded-full bg-zinc-400 text-black font-mono font-black text-xs flex items-center justify-center border border-zinc-950">
+                        <span className="absolute bottom-[-5px] right-[-5px] h-6 w-6 rounded-full bg-zinc-700 text-white font-mono font-black text-xs flex items-center justify-center border border-zinc-805">
                           2
                         </span>
                       </div>
                       <div>
-                        <h4 className="text-xs font-black text-white hover:text-cyan-400 truncate">
+                        <h4 className="text-xs font-black text-white hover:text-orange-500 truncate">
                           <Link href={`/profile/${podium[1].username}`}>{podium[1].username}</Link>
                         </h4>
-                        <p className="text-[10px] text-cyan-400 font-bold">
+                        <p className="text-[10px] text-orange-500 font-bold">
                           {criteria === 'xp' ? `${(podium[1].xp).toLocaleString()} XP` :
                            criteria === 'wins' ? `${podium[1].tournamentWins} Wins` :
                            `${podium[1].winRate}% WR`}
                         </p>
                       </div>
-                      <div className="h-20 bg-zinc-900 border-t border-x border-zinc-800 rounded-t-lg shadow-inner" />
+                      <div className="h-20 bg-zinc-800 border-t border-x border-zinc-700 rounded-t-lg shadow-inner" />
                     </motion.div>
                   )}
 
@@ -134,21 +135,21 @@ export default function LeaderboardsPage() {
                           alt=""
                           className="h-20 w-20 rounded-full border-2 border-yellow-500 bg-zinc-950 shadow-[0_0_15px_rgba(234,179,8,0.25)]"
                         />
-                        <span className="absolute bottom-[-5px] right-[-5px] h-7 w-7 rounded-full bg-yellow-500 text-black font-mono font-black text-sm flex items-center justify-center border border-zinc-950">
+                        <span className="absolute bottom-[-5px] right-[-5px] h-7 w-7 rounded-full bg-yellow-500 text-black font-mono font-black text-sm flex items-center justify-center border border-zinc-805">
                           1
                         </span>
                       </div>
                       <div>
-                        <h4 className="text-sm font-black text-white hover:text-cyan-400 truncate">
+                        <h4 className="text-sm font-black text-white hover:text-orange-500 truncate">
                           <Link href={`/profile/${podium[0].username}`}>{podium[0].username}</Link>
                         </h4>
-                        <p className="text-xs font-black text-yellow-500">
+                        <p className="text-xs font-black text-yellow-600">
                           {criteria === 'xp' ? `${(podium[0].xp).toLocaleString()} XP` :
                            criteria === 'wins' ? `${podium[0].tournamentWins} Wins` :
                            `${podium[0].winRate}% WR`}
                         </p>
                       </div>
-                      <div className="h-28 bg-zinc-900/80 border-t border-x border-yellow-500/30 rounded-t-lg shadow-md" />
+                      <div className="h-28 bg-zinc-800/90 border-t border-x border-yellow-500/50 rounded-t-lg shadow-md" />
                     </motion.div>
                   )}
 
@@ -167,21 +168,21 @@ export default function LeaderboardsPage() {
                           alt=""
                           className="h-16 w-16 rounded-full border-2 border-amber-600 bg-zinc-950"
                         />
-                        <span className="absolute bottom-[-5px] right-[-5px] h-6 w-6 rounded-full bg-amber-600 text-black font-mono font-black text-xs flex items-center justify-center border border-zinc-950">
+                        <span className="absolute bottom-[-5px] right-[-5px] h-6 w-6 rounded-full bg-amber-600 text-black font-mono font-black text-xs flex items-center justify-center border border-zinc-805">
                           3
                         </span>
                       </div>
                       <div>
-                        <h4 className="text-xs font-black text-white hover:text-cyan-400 truncate">
+                        <h4 className="text-xs font-black text-white hover:text-orange-500 truncate">
                           <Link href={`/profile/${podium[2].username}`}>{podium[2].username}</Link>
                         </h4>
-                        <p className="text-[10px] text-cyan-400 font-bold">
+                        <p className="text-[10px] text-orange-500 font-bold">
                           {criteria === 'xp' ? `${(podium[2].xp).toLocaleString()} XP` :
                            criteria === 'wins' ? `${podium[2].tournamentWins} Wins` :
                            `${podium[2].winRate}% WR`}
                         </p>
                       </div>
-                      <div className="h-16 bg-zinc-900 border-t border-x border-zinc-800 rounded-t-lg shadow-inner" />
+                      <div className="h-16 bg-zinc-800 border-t border-x border-zinc-700 rounded-t-lg shadow-inner" />
                     </motion.div>
                   )}
 
@@ -198,16 +199,16 @@ export default function LeaderboardsPage() {
                     <motion.div
                       key={player.id}
                       variants={itemVariants}
-                      className="flex items-center justify-between p-3.5 border border-zinc-900 bg-zinc-950/40 rounded-xl hover:border-zinc-850 transition-colors"
+                      className="flex items-center justify-between p-3.5 border border-zinc-850 bg-zinc-950/40 backdrop-blur-md rounded-xl hover:border-zinc-800 transition-colors shadow-sm"
                     >
                       <div className="flex items-center gap-4">
                         <span className="font-mono text-zinc-500 font-black text-sm w-6">
                           #{idx + 4}
                         </span>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={player.avatar} alt="" className="h-9 w-9 rounded-full border border-zinc-800 bg-zinc-900" />
+                        <img src={player.avatar} alt="" className="h-9 w-9 rounded-full border border-zinc-805 bg-zinc-900" />
                         <div>
-                          <h4 className="text-sm font-black text-white hover:text-cyan-400 transition-colors leading-tight">
+                          <h4 className="text-sm font-black text-white hover:text-orange-500 transition-colors leading-tight">
                             <Link href={`/profile/${player.username}`}>{player.username}</Link>
                           </h4>
                           <p className="text-[10px] text-zinc-500 font-semibold">{player.rank}</p>
@@ -215,7 +216,7 @@ export default function LeaderboardsPage() {
                       </div>
 
                       <div className="text-right">
-                        <p className="text-sm font-black text-cyan-400">
+                        <p className="text-sm font-black text-orange-500">
                           {criteria === 'xp' ? `${(player.xp).toLocaleString()} XP` :
                            criteria === 'wins' ? `${player.tournamentWins} Wins` :
                            `${player.winRate}% WR`}
@@ -230,7 +231,7 @@ export default function LeaderboardsPage() {
 
               </div>
             ) : (
-              <div className="text-center py-20 border border-dashed border-zinc-900 rounded-xl bg-zinc-950/20 text-zinc-500">
+              <div className="text-center py-20 border border-dashed border-zinc-850 rounded-xl bg-zinc-950/20 shadow-sm text-zinc-500">
                 No active players registered on leaderboard.
               </div>
             )}
@@ -240,13 +241,13 @@ export default function LeaderboardsPage() {
           <div className="space-y-6">
             <div>
               <h2 className="text-xl font-bold uppercase tracking-tight text-white font-oswald flex items-center gap-2 border-b border-zinc-900 pb-3">
-                <Award className="h-5 w-5 text-yellow-500" /> Host Organizers
+                <Award className="h-5 w-5 text-orange-500" /> Host Organizers
               </h2>
             </div>
             
-            <div className="space-y-3 bg-zinc-950/40 border border-zinc-900 p-4 rounded-xl">
+            <div className="space-y-3 bg-zinc-950/40 border border-zinc-900 p-4 rounded-xl shadow-sm">
               {topOrganizers.map((org, index) => (
-                <div key={org.id} className="flex items-center justify-between py-2 border-b border-zinc-900 last:border-0">
+                <div key={org.id} className="flex items-center justify-between py-2 border-b border-zinc-905 last:border-0">
                   <div className="flex items-center gap-3">
                     <span className="font-mono text-zinc-500 font-black text-xs">#{index + 1}</span>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -257,7 +258,7 @@ export default function LeaderboardsPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className="text-[10px] text-cyan-400 font-bold bg-cyan-950/20 border border-cyan-900/30 px-2 py-0.5 rounded">
+                    <span className="text-[10px] text-orange-400 font-bold bg-orange-500/10 border border-orange-500/20 px-2 py-0.5 rounded">
                       {org.followers.toLocaleString()}
                     </span>
                   </div>
@@ -268,7 +269,7 @@ export default function LeaderboardsPage() {
 
         </div>
 
-      </div>
+      </Container>
     </div>
   );
 }
