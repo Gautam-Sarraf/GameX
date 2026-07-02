@@ -9,12 +9,25 @@ import { Button } from './ui/button';
 import { AuthService } from '@/services/auth.service';
 import { NotificationService } from '@/services/notification.service';
 import { cn } from '@/lib/utils';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function Navbar() {
   const pathname = usePathname();
   const queryClient = useQueryClient();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = React.useState(false);
+
+  // Disable body scroll when mobile menu is open
+  React.useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   // Fetch Session User
   const { data: user } = useQuery({
@@ -49,7 +62,8 @@ export function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md">
+    <>
+      <header className="sticky top-0 z-40 w-full border-b border-zinc-900/40 bg-zinc-950/30 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         
         {/* Logo */}
@@ -133,6 +147,14 @@ export function Navbar() {
                         <SettingsIcon className="mr-2 h-4 w-4 text-purple-500" />
                         Settings
                       </Link>
+                      <Link
+                        href="/applied-tournaments"
+                        onClick={() => setProfileDropdownOpen(false)}
+                        className="flex w-full items-center px-3 py-2 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors"
+                      >
+                        <Trophy className="mr-2 h-4 w-4 text-orange-500" />
+                        Applied Tournaments
+                      </Link>
                       <hr className="border-zinc-900 my-1" />
                       <button
                         onClick={() => logoutMutation.mutate()}
@@ -174,57 +196,115 @@ export function Navbar() {
         </div>
 
       </div>
-
-      {/* Mobile Drawer Dropdown */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-b border-zinc-800 bg-zinc-950 px-4 pt-2 pb-4 space-y-1">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={cn(
-                  'block px-3 py-2.5 rounded-md text-base font-semibold',
-                  isActive ? 'bg-zinc-900 text-orange-500 border-l-2 border-orange-500' : 'text-zinc-400 hover:text-white hover:bg-zinc-900/50'
-                )}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
-          {user && (
-            <Link
-              href={`/profile/${user.username}`}
-              onClick={() => setMobileMenuOpen(false)}
-              className={cn(
-                'block px-3 py-2.5 rounded-md text-base font-semibold',
-                pathname.startsWith('/profile') ? 'bg-zinc-900 text-orange-500' : 'text-zinc-400 hover:text-white'
-              )}
-            >
-              Profile
-            </Link>
-          )}
-          <hr className="border-zinc-900 my-2" />
-          {user ? (
-            <button
-              onClick={() => {
-                logoutMutation.mutate();
-                setMobileMenuOpen(false);
-              }}
-              className="flex w-full items-center px-3 py-2 text-base font-semibold text-red-400"
-            >
-              <LogOut className="mr-2 h-4 w-4" />
-              Log Out
-            </button>
-          ) : (
-            <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2">
-              <Button variant="glow" className="w-full">Login</Button>
-            </Link>
-          )}
-        </div>
-      )}
     </header>
+
+    {/* Mobile Drawer Overlay and Panel */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm md:hidden"
+            />
+            {/* Slide-in Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed inset-y-0 right-0 z-50 w-72 bg-[#09090b] border-l border-zinc-900 p-6 shadow-2xl flex flex-col space-y-6 md:hidden"
+              style={{ backgroundColor: '#09090b' }}
+            >
+              {/* Drawer Header with Close Button */}
+              <div className="flex items-center justify-between pb-4 border-b border-zinc-900">
+                <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                  <img src="/assets/images/logo.svg" alt="GameX Logo" className="h-7 w-auto" />
+                </Link>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-zinc-400 hover:text-white focus:outline-none p-1 cursor-pointer"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+
+              {/* Drawer Links */}
+              <nav className="flex flex-col space-y-3 flex-grow overflow-y-auto">
+                {navLinks.map((link) => {
+                  const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+                  return (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={cn(
+                        'px-3 py-2.5 rounded-md text-base font-semibold transition-all block',
+                        isActive 
+                          ? 'bg-zinc-900 text-orange-500 border-l-2 border-orange-500' 
+                          : 'text-zinc-300 hover:text-white hover:bg-zinc-900/50'
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                })}
+                {user && (
+                  <>
+                    <Link
+                      href={`/profile/${user.username}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={cn(
+                        'px-3 py-2.5 rounded-md text-base font-semibold transition-all block',
+                        pathname.startsWith('/profile') 
+                          ? 'bg-zinc-900 text-orange-500 border-l-2 border-orange-500' 
+                          : 'text-zinc-300 hover:text-white hover:bg-zinc-900/50'
+                      )}
+                    >
+                      Profile
+                    </Link>
+                    <Link
+                      href="/applied-tournaments"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={cn(
+                        'px-3 py-2.5 rounded-md text-base font-semibold transition-all block',
+                        pathname === '/applied-tournaments' 
+                          ? 'bg-zinc-900 text-orange-500 border-l-2 border-orange-500' 
+                          : 'text-zinc-300 hover:text-white hover:bg-zinc-900/50'
+                      )}
+                    >
+                      Applied Tournaments
+                    </Link>
+                  </>
+                )}
+              </nav>
+
+              {/* Drawer Footer Actions */}
+              <div className="pt-4 border-t border-zinc-900 space-y-4">
+                {user ? (
+                  <button
+                    onClick={() => {
+                      logoutMutation.mutate();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="flex w-full items-center px-3 py-3 text-base font-semibold text-red-400 hover:bg-red-950/10 rounded-md transition-colors cursor-pointer"
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Log Out
+                  </button>
+                ) : (
+                  <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="block">
+                    <Button variant="glow" className="w-full">Login</Button>
+                  </Link>
+                )}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

@@ -22,13 +22,45 @@ export class TournamentService {
     await delay(800);
     const newId = `trn-${inMemoryTournaments.length + 1}`;
     
+    const getGameBanner = (gameName: string) => {
+      const name = gameName.toLowerCase();
+      if (name.includes('counter-strike') || name.includes('cs2') || name.includes('cs:go')) {
+        return '/assets/images/gallery-img-1.jpg';
+      }
+      if (name.includes('valorant')) {
+        return '/assets/images/gallery-img-2.jpg';
+      }
+      if (name.includes('league of legends') || name.includes('lol')) {
+        return '/assets/images/gallery-img-3.jpg';
+      }
+      if (name.includes('dota')) {
+        return '/assets/images/gallery-img-4.jpg';
+      }
+      if (name.includes('fortnite')) {
+        return '/assets/images/gallery-img-1.jpg';
+      }
+      if (name.includes('apex')) {
+        return '/assets/images/gallery-img-2.jpg';
+      }
+      if (name.includes('rocket league')) {
+        return '/assets/images/gallery-img-3.jpg';
+      }
+      if (name.includes('overwatch')) {
+        return '/assets/images/gallery-img-4.jpg';
+      }
+      return '/assets/images/hero-banner.jpg';
+    };
+
+    const selectedGame = data.game || 'Counter-Strike 2';
+    const bannerPath = getGameBanner(selectedGame);
+
     // Default mock structures
     const newTournament: Tournament = {
       id: newId,
       title: data.title || 'New Tournament',
       description: data.description || '',
-      banner: '/assets/images/hero-banner.jpg',
-      game: data.game || 'Counter-Strike 2',
+      banner: bannerPath,
+      game: selectedGame,
       prizePool: data.prizePool || 0,
       entryFee: data.entryFee || 0,
       maxSlots: data.maxSlots || 16,
