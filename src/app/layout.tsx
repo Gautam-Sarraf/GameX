@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { Montserrat, Oswald, Poppins } from 'next/font/google';
 import QueryProvider from '@/providers/QueryProvider';
 import ThemeProvider from '@/providers/ThemeProvider';
-import { Toaster } from 'sonner';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Navbar } from '@/components/Navbar';
 import './globals.css';
 
@@ -50,7 +51,7 @@ export default function RootLayout({
             <main className="flex-grow flex flex-col">
               {children}
             </main>
-            <Toaster position="bottom-right" theme="dark" richColors />
+            <ToastContainer position="bottom-right" theme="dark" autoClose={3000} />
           </ThemeProvider>
         </QueryProvider>
       </body>

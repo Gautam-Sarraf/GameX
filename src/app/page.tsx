@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { Trophy, Users, Gamepad2, Play, Users2, ShoppingBag, ArrowRight, ShieldCheck, Flame, Star } from 'lucide-react';
-import { toast } from 'sonner';
+import { toast } from 'react-toastify';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { TournamentCard } from '@/components/TournamentCard';

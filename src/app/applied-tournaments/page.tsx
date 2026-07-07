@@ -10,7 +10,7 @@ import { TournamentCard } from '@/components/TournamentCard';
 import { TournamentService } from '@/services/tournament.service';
 import { AuthService } from '@/services/auth.service';
 import { Container } from '@/components/ui/Container';
-import { toast } from 'sonner';
+import { toast } from 'react-toastify';
 
 export default function AppliedTournamentsPage() {
   const router = useRouter();

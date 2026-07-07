@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Search, SlidersHorizontal, LayoutGrid, List, ChevronLeft, ChevronRight, Trophy } from 'lucide-react';
-import { toast } from 'sonner';
+import { toast } from 'react-toastify';
 import { Button } from '@/components/ui/button';
 import { TournamentCard } from '@/components/TournamentCard';
 import { Container } from '@/components/ui/Container';
